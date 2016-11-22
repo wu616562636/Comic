@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Test">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="angular.js"></script>
+    <script>
+        /*rem 自适应*/
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+    </script>
+    <script>
+        var appModule = angular.module("Test",[]);
+
+        appModule.controller("gll",function ($scope) {
+            $scope.items=[
+                {"src":1,"intro":"第一张"},
+                {"src":2,"intro":"第二张"},
+                {"src":3,"intro":"第三张"},
+                {"src":4,"intro":"第四张"},
+                {"src":5,"intro":"第五张"},
+                {"src":6,"intro":"第六张"},
+                {"src":7,"intro":"第七张"},
+                {"src":8,"intro":"第八张"},
+                {"src":9,"intro":"第九张"}
+            ]
+        })
+    </script>
+    <style>
+        html,
+        body,
+        figure,
+        figcaption,
+        img {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: .16rem;
+            padding-left: .6rem;
+        }
+        figure {
+            display: inline-block;
+            width: 2rem;
+            margin-right: .2rem;
+        }
+        figcaption {
+            text-align: center;
+        }
+        figure img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body ng-controller="gll" class="grid">
+    <figure ng-repeat="item in items" class="grid-item">
+        <img ng-src="{{item.src}}.jpg" alt="img">
+        <figcaption>{{item.intro}}</figcaption>
+    </figure>
+</body>
+</html>
